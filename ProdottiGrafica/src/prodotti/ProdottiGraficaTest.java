@@ -207,13 +207,16 @@ public class ProdottiGraficaTest {
 		btnAggiungiProdotto.setEnabled(false);
 		btnAggiungiProdotto.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
+				String codice, descrizione, materiale; 
+				float prezzo;
+				int a, m, g;
 				if(Prodotto.getSelectionIndex() == 0) {
-					String codice = Codice.getText();
-					String descrizione = Descrizione.getText();
-					float prezzo = Float.parseFloat(Prezzo.getText());
-					int g = Integer.parseInt(Giorno.getText());
-					int m = Integer.parseInt(Mese.getText());
-					int a = Integer.parseInt(Anno.getText());
+					codice = Codice.getText();
+					descrizione = Descrizione.getText();
+					prezzo = Float.parseFloat(Prezzo.getText());
+					g = Integer.parseInt(Giorno.getText());
+					m = Integer.parseInt(Mese.getText());
+					a = Integer.parseInt(Anno.getText());
 					Alimentare al = new Alimentare(codice, descrizione, prezzo, new Data(g, m, a));
 					try {
 						ls[n].aggiungiProdotto(al);
@@ -228,10 +231,10 @@ public class ProdottiGraficaTest {
 					item.setText(3, Float.toString(al.getPrezzo()));
 					item.setText(4, Integer.toString(g) + "/" + Integer.toString(m) + "/" + Integer.toString(a));
 				} else {
-					String codice = Codice.getText();
-					String descrizione = Descrizione.getText();
-					float prezzo = Float.parseFloat(Prezzo.getText());
-					String materiale = Materiale.getText();
+					codice = Codice.getText();
+					descrizione = Descrizione.getText();
+					prezzo = Float.parseFloat(Prezzo.getText());
+					materiale = Materiale.getText();
 					NonAlimentare nal = new NonAlimentare(codice, descrizione, prezzo, materiale);
 					try {
 						ls[n].aggiungiProdotto(nal);
