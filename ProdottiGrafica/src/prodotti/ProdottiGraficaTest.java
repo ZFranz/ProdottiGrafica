@@ -69,7 +69,7 @@ public class ProdottiGraficaTest {
 	 */
 	protected void createContents() {
 		shlSpesaGrafica = new Shell();
-		shlSpesaGrafica.setImage(SWTResourceManager.getImage("C:\\Users\\zhouzhiqiang\\Downloads\\download (1).jpg"));
+		shlSpesaGrafica.setImage(SWTResourceManager.getImage("download.jpg"));
 		shlSpesaGrafica.setSize(720, 400);
 		shlSpesaGrafica.setText("Zhou S.P.A.");
 		
