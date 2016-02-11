@@ -1,6 +1,7 @@
 package prodotti;
 
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Label;
 import java.io.IOException;
@@ -20,7 +21,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.wb.swt.SWTResourceManager;
 
-public class ProdottiGraficaTest {
+public class ProdottiGraficaTestV2 {
 
 	protected Shell shlSpesaGrafica;
 	private Text Codice;
@@ -41,7 +42,7 @@ public class ProdottiGraficaTest {
 	 */
 	public static void main(String[] args) {
 		try {
-			ProdottiGraficaTest window = new ProdottiGraficaTest();
+			ProdottiGraficaTestV2 window = new ProdottiGraficaTestV2();
 			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -372,8 +373,16 @@ public class ProdottiGraficaTest {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				int nP = ls[n].numProdotti;
+				FileDialog fileDialog = new FileDialog(shlSpesaGrafica);
+				fileDialog.setFilterExtensions(new String[]{"*.txt", "*.csv", "*.*"}); //opzionale
+				String fileScelto = fileDialog.open();
+
+				if(fileScelto != null) {
+					MessageDialog.openInformation(shlSpesaGrafica, "File ", fileScelto);
+					MessageDialog.openInformation(shlSpesaGrafica, "File (solo nome)", fileDialog.getFileName());
+				}
 				try {
-					ls[n].caricaScontrini();
+					ls[n].caricaScontrini(fileScelto);
 					for(int i = nP; i < ls[n].numProdotti; i++) {
 						if(ls[n].getLista()[i] instanceof Alimentare) {
 							TableItem item = new TableItem (Table, SWT.NONE);
@@ -411,7 +420,7 @@ public class ProdottiGraficaTest {
 						shlSpesaGrafica.getShell(),
 						"Nuovo scontrino",
 						null,
-						"Hai la tessera fedeltÃ ?",
+						"Hai la tessera fedeltà?",
 						MessageDialog.QUESTION,
 						new String[] {
 								IDialogConstants.YES_LABEL,

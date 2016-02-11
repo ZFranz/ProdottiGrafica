@@ -126,6 +126,43 @@ public class ListaSpesa implements Serializable{
 		} catch(FileException exception) {
 		}
 	}
+	
+	public void caricaScontrini(String fileScelto) throws java.io.IOException, FileException {
+		// TODO Auto-generated method stub
+		TextFile in = new TextFile(fileScelto, 'R');
+		int posizione;
+		String linea, prodotto, codice, descrizione, materiale;
+		String [] elementi;
+		int g = 0, m = 0, a = 0;
+		float prezzo;
+		
+		try {
+			while(true) {
+				linea = in.fromFile();
+				elementi = linea.split(";");
+				prodotto = elementi[1];
+				if(prodotto.equals("Alimentare")) {
+					codice = elementi[2];
+					descrizione = elementi[3];
+					prezzo = Float.parseFloat(elementi[4]);
+					g = Integer.valueOf(elementi[5]).intValue();
+					m = Integer.valueOf(elementi[6]).intValue();
+					a = Integer.valueOf(elementi[7]).intValue();
+					Alimentare al = new Alimentare(codice, descrizione, prezzo, new Data(g, m, a));
+					lista[numProdotti++] = al;
+				} else {
+					codice = elementi[2];
+					descrizione = elementi[3];
+					prezzo = Float.parseFloat(elementi[4]);
+					materiale = elementi[5];
+					NonAlimentare nal = new NonAlimentare(codice, descrizione, prezzo, materiale);
+					lista[numProdotti++] = nal;
+				}
+
+			}
+		} catch(FileException exception) {
+		}
+	}
 
 	public void salvaScontriniBin() {
 		ObjectOutputStream stream;
@@ -172,5 +209,4 @@ public class ListaSpesa implements Serializable{
 
 		return s;
 	}
-
 }
