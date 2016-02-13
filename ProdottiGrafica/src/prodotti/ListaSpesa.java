@@ -1,11 +1,8 @@
 package prodotti;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
@@ -61,8 +58,6 @@ public class ListaSpesa implements Serializable{
 
 	public void salvaScontrini() throws java.io.IOException, FileException {
 		TextFile out = new TextFile("scontrino.txt", 'W');
-		int tempg, tempm, tempa;
-		String temps;
 
 		for(int i = 0; i < numProdotti; i++) {
 			if(lista[i] != null) {
@@ -93,7 +88,6 @@ public class ListaSpesa implements Serializable{
 
 	public void caricaScontrini() throws java.io.IOException, FileException {
 		TextFile in = new TextFile("scontrino.txt", 'R');
-		int posizione;
 		String linea, prodotto, codice, descrizione, materiale;
 		String [] elementi;
 		int g = 0, m = 0, a = 0;
@@ -130,7 +124,6 @@ public class ListaSpesa implements Serializable{
 	public void caricaScontrini(String fileScelto) throws java.io.IOException, FileException {
 		// TODO Auto-generated method stub
 		TextFile in = new TextFile(fileScelto, 'R');
-		int posizione;
 		String linea, prodotto, codice, descrizione, materiale;
 		String [] elementi;
 		int g = 0, m = 0, a = 0;
